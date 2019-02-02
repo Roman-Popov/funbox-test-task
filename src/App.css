@@ -1,32 +1,301 @@
+html,
+body,
+#root {
+    height: 100%;
+    width: 100%;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+        "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+        sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
 .App {
-  text-align: center;
+    text-align: center;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
+.balloon-body {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.3em;
+    max-width: 15em;
+    word-break: break-all;
+    word-break: break-word;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.control-panel {
+    position: relative;
+    flex-shrink: 0;
+    width: 270px;
+    max-width: 35vw;
+    height: 100%;
+    background: whitesmoke;
+    padding: 0.5em;
+    box-shadow: 0 0 5px black;
+    z-index: 1;
+    box-sizing: border-box;
 }
 
-.App-link {
-  color: #61dafb;
+#add-node {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 4em;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+#add-node label {
+    margin-bottom: 0.5em;
+}
+
+#add-node .input-wrapper {
+    width: 100%;
+}
+
+#placemark-name {
+    widows: 70%;
+}
+
+button {
+    cursor: pointer;
+}
+
+h3 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 3em;
+    margin: 0;
+}
+
+.node-list {
+    width: 100%;
+    max-height: calc(100% - 7.5em);
+    box-shadow: inset 0 0 10px #cecece, 0 0 1px 1px #939393;
+    margin: 0;
+    padding-top: 0.25em;
+    padding-bottom: 0.25em;
+    background: white;
+    box-sizing: border-box;
+    overflow: auto;
+}
+
+.node-item {
+    position: relative;
+    min-height: 2em;
+}
+
+.drag {
+    cursor: move;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 1.5em;
+    height: 1.5em;
+    margin: 0.25em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    opacity: 0;
+}
+
+.drag .arrows {
+    position: absolute;
+    transform: rotate(45deg);
+    width: 0.9em;
+    height: 0.9em;
+    background-color: black;
+    opacity: 0.5;
+}
+
+.drag:hover .arrows {
+    opacity: 1;
+}
+
+.drag .substrate {
+    position: absolute;
+    width: 100%;
+    height: 0.9em;
+    background-color: inherit;
+}
+
+.drag .bar {
+    position: absolute;
+    width: 0.8em;
+    height: 0.1em;
+    background-color: black;
+    opacity: 0.5;
+}
+
+.drag .bar:nth-child(3) {
+    transform: translateY(0.25em)
+}
+
+.drag .bar:last-child {
+    transform: translateY(-0.25em)
+}
+
+.drag:hover .bar {
+    opacity: 1;
+}
+
+.node-item:hover .drag {
+    opacity: 1;
+}
+
+.node-name {
+    text-align: left;
+    margin: 0 2em;
+    display: flex;
+    align-items: center;
+    line-height: 2em;
+    width: calc(100% - 4em);
+    box-sizing: border-box;
+    word-break: break-all;
+    word-break: break-word;
+}
+
+.node-item.dragged .node-name {
+    border: dashed gray;
+    border-width: 1px 0;
+    margin: -1px 2em;
+}
+
+.delete-node {
+    cursor: pointer;
+    position: absolute;
+    box-sizing: border-box;
+    top: 0;
+    right: 0;
+    font-size: 1em;
+    width: 0.8em;
+    height: 0.8em;
+    margin: 0.6em;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0.5;
+    border: 1px solid black;
+}
+
+.delete-node:hover {
+    opacity: 1;
+}
+
+.delete-node .bar {
+    display: block;
+    background-color: black;
+    width: 1px;
+    height: 0.6em;
+    position: absolute;
+    transform: rotate(45deg);
+}
+
+.delete-node .bar:last-child {
+    transform: rotate(-45deg);
+}
+
+#expand-note {
+    background-color: inherit;
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 1.5em;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    visibility: hidden;
+    transition: none;
+}
+
+#expand-note span {
+    transform: rotate(-90deg);
+    white-space: nowrap;
+
+}
+
+#expand-list {
+    width: 30px;
+    height: 50px;
+    position: absolute;
+    bottom: 25%;
+    right: -30px;
+    z-index: 1;
+    border: none;
+    background-color: inherit;
+    border-radius: 0 40% 40% 0;
+    box-shadow: 4px 0 10px -4px black;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 0 5px 0 0;
+}
+
+.expand-arrow {
+    display: block;
+    width: 0;
+    height: 0;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    border-right: 10px solid dimgray;
+    transform: rotateY(0deg);
+    transition: transform 0.25s ease-in-out;
+}
+
+
+@media screen and (max-width: 650px) {
+    .control-panel {
+        position: absolute;
+        z-index: 1;
+        top: 0;
+        max-width: unset;
+        right: calc(100vw - 1.5em);
+        transition: right ease-in-out 0.25s;
+    }
+
+    .control-panel.visible {
+        right: calc(100vw - 270px);
+    }
+
+    #map {
+        margin-left: 1.5em;
+        max-width: calc(100% - 1.5em);
+    }
+
+    .control-panel #expand-note {
+        display: flex;
+    }
+
+    .control-panel:not(.visible) #expand-note {
+        visibility: visible;
+        transition: visibility 0s 0.25s;
+    }
+
+    .control-panel:not(.visible) .expand-arrow {
+        transform: rotateY(180deg);
+    }
+
+    #expand-list {
+        display: flex;
+    }
 }
