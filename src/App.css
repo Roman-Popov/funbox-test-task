@@ -87,7 +87,7 @@ h3 {
 
 .node-list {
     width: 100%;
-    max-height: calc(100% - 7.5em);
+    max-height: calc(100% - 7.5em - 3em);
     box-shadow: inset 0 0 10px #cecece, 0 0 1px 1px #939393;
     margin: 0;
     padding-top: 0.25em;
@@ -298,4 +298,21 @@ h3 {
     #expand-list {
         display: flex;
     }
+}
+
+.run-tests {
+    position: absolute;
+    bottom: 1em;
+    left: calc(50% - 5em);
+    width: 10em;
+    height: 2em;
+}
+
+.jasmine_html-reporter {
+    width: 100%;
+    margin: 0;
+    box-sizing: border-box;
+    position: relative;
+    z-index: 1;
+    scroll-behavior: smooth;
 }

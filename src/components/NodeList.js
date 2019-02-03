@@ -69,7 +69,7 @@ class NodeList extends Component {
 
                 {/* Responsive Design */}
                 {/* Для просмотра на узких экранах - панель точек открывается по клику */}
-                <div id="expand-note">
+                <div id="expand-note" onClick={(e) => this.expandList(e.currentTarget.parentNode)}>
                     <span>Показать список точек</span>
                 </div>
                 <button
@@ -77,6 +77,16 @@ class NodeList extends Component {
                     onClick={(e) => this.expandList(e.currentTarget.parentNode)}
                 >
                     <span className="expand-arrow"></span>
+                </button>
+
+                <button
+                    className="run-tests"
+                    onClick={() => setTimeout(() => {
+                        window.startTests();
+                        document.querySelector('.jasmine_html-reporter').scrollIntoView();
+                    }, 1)}
+                >
+                    Запустить тесты
                 </button>
             </div>
         );
